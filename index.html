@@ -2,9 +2,7 @@
   <head>
     <title>Point Clicker</title>
     <style type="text/css">
-
     </style>
-
   </head>
   <body>
     <div class="container">
@@ -13,21 +11,29 @@
     </div>
   </body>
   <script type="text/javascript">
-    var points = 0;
-    function getParentWindow() {
-      return window.parent;
+    window.WizardOfOz = function(id) {
+      this.lessonId = id;
+      var url = 'http://localhost:4200';
+      this.recordResult = function(score) {
+        if (!window.parent) return;
+        window.parent.postMessage({id: id, score: score}, url);
+      }
     }
+  </script>
+  <script type="text/javascript">
+    var points = 0;
     document.getElementById("add-point")
       .addEventListener("click", function(){
         addPoint();
       });
+    var id = 'id-1401-120901-1021201';
+    var oz = new WizardOfOz(id);
     function addPoint() {
       console.log('point added');
       points++;
-      var message = points + ' Points';
+      var message = points + ' Fancy Points';
       document.getElementById("output").textContent = message;
-      var myEvent = new CustomEvent('message', { detail: {points: points, url: 'some url'} })
-      window.parent.document.dispatchEvent(myEvent)
+      oz.recordResult(points);
     }
   </script>
 </html>
