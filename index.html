@@ -14,6 +14,9 @@
   </body>
   <script type="text/javascript">
     var points = 0;
+    function getParentWindow() {
+      return window.parent;
+    }
     document.getElementById("add-point")
       .addEventListener("click", function(){
         addPoint();
@@ -23,6 +26,8 @@
       points++;
       var message = points + ' Points';
       document.getElementById("output").textContent = message;
+      var myEvent = new CustomEvent('message', { detail: {points: points, url: 'some url'} })
+      window.parent.document.dispatchEvent(myEvent)
     }
   </script>
 </html>
