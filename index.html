@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>Point Clicker</title>
+    <style type="text/css">
+
+    </style>
+
+  </head>
+  <body>
+    <div class="container">
+      <p id="output">0 Points</p>
+      <button id="add-point">Add Point</button>
+    </div>
+  </body>
+  <script type="text/javascript">
+    var points = 0;
+    document.getElementById("add-point")
+      .addEventListener("click", function(){
+        addPoint();
+      });
+    function addPoint() {
+      console.log('point added');
+      points++;
+      var message = points + ' Points';
+      document.getElementById("output").textContent = message;
+    }
+  </script>
+</html>
